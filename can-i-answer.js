@@ -49,26 +49,33 @@ export const palavrasMundialPalmeiras = {
     matched: 0,
 }
 
-export const papoFurado = {
+export const comoDarUmaBicicleta = {
     probablyWords: [
-        "palmeiras", "tem", "mundial",
-        "mundial", "palmeiras",
-        "mundial",
-        "tem", "copa", "do", "mundo",
-        "campeão", "mundial"
+        "bicicleta", "pular", "gol", "de",
+        "como", "dar", "jeito"
     ],
     matched: 0,
 }
 
-// Trata a resposta
-const trataResposta = (resposta) => {
-    // Sorteia uma introdução aleatória para nossa resposta na nossa array de strings
-    const introducoes = ["Bem...", "Hum...", "Ah...", "Como diria o velho Zagalo... ", "Deixando de lado o Pelé ser melhor que o Maradona... "] // Uma lista de introduções que nosso "MODELO" tem
-    const introducao = introducoes[Math.floor(Math.random() * introducoes.length)] // Sorteia um número, e pega uma palavra nessa posição na array
-    
-    return `${introducao} ${resposta}` // Interpola a introdução com a resposta que já temos
-  }
+// Futebol de videogame?
+export const palavrasPS4 = {
+    probablyWords: [
+    "quais", "os", "jogos", "de", "futebol", "videogame",
+    "quais", "sao", "as", "versões", "do", "Fifa",
+    "eletronicos", "de", "futebol",
+    "futebol", "simulador",
+    "como", "jogar", "no", "PS4"
+    ],
+    matched: 0,
+}
 
+export const palavrasPapoFurado = {
+    probablyWords: [
+        "basquete", "triatlo", "ping-pong",
+        "escola", "sair",
+    ],
+    matched: 0,
+}
 
 function showAnswer(index) {
     switch (index) {
@@ -80,20 +87,31 @@ function showAnswer(index) {
             return "Eu gosto do tigre"
         case 3:
             return "O palmeiras não tem mundial, mas tem copa RIO, mas eles falam que tem né, fazer oq"
+        case 4:
+            return "Para se dar uma bicicleta, só dar um mortal chutando"
+        case 5:
+            return "É melhor ir jogar Fifa no PS4"        
         default:
             return "Só sei falar de futebol meu amigo, se não for isso, tchau"
     }
 }
 
-export function mostProbablyQuestion() {
+export function mostProbablyQuestion(pergunta) {
+    if (pergunta.includes("basquete")) {
+        return "não falo de basquete"
+    }
     let matches = [
         palavrasFutebol.matched, 
         palavrasRegras.matched, 
         palavrasTimeGosta.matched,
         palavrasMundialPalmeiras.matched, 
-        papoFurado.matched
+        comoDarUmaBicicleta.matched,
+        palavrasPS4.matched,
+        palavrasPapoFurado.matched,
     ]
-
+    console.log(matches)
+    console.log(Math.max(...matches))
+    console.log(matches.indexOf(Math.max(...matches)))
     // Vê quantas palavras de cada pergunta foi usada
     return showAnswer(matches.indexOf(Math.max(...matches)))
 }
